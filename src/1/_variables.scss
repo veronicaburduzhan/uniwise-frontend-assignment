@@ -1,0 +1,31 @@
+// Color palette
+$color-black: #000;
+$color-white: #fff;
+$color-gray-700: #707070;
+$color-gray-200: #e0e0e0;
+$primary-color: #89ab3d;
+$error-color: #f72c5b;
+$error-color-bg: #feeaef;
+
+// Font
+$font-stack: Open Sans, sans-serif;
+$font-size-small: 0.75rem;
+$font-size-normal: 1rem;
+$font-size-large: 1.5rem;
+$font-weight-bold: 600;
+$color-text-primary: $color-black;
+$color-text-secondary: $color-gray-700;
+
+// Borders
+$border-radius: 0.5rem;
+$border-radius-small: 0.5rem;
+$border-width: 1px;
+$color-border: $color-gray-200;
+
+// Background and spacings
+$space-xsmall: 0.5rem;
+$space-small: 0.75rem;
+$space-normal: 1rem;
+$space-large: 1.5rem;
+$space-xlarge: 2rem;
+$color-background: $color-white;
