@@ -2,27 +2,49 @@
 import { useState } from "react";
 import "./index.scss";
 import { LoginInputForm } from "./LoginInput/LoginInputForm";
+import { ReactComponent as GoogleIcon } from "./assets/google-icon.svg";
+import { ReactComponent as AppleIcon } from "./assets/apple-icon.svg";
+import { ReactComponent as FacebookIcon } from "./assets/facebook-icon.svg";
 
 // TEST VALUES TO SEE FORM UI RESPONSES
 const EMAIL = "test@test.com";
 const PASSWORD = "test1";
 
+enum LoginFormError {
+  empty = "Please fill in missing fields",
+  incorrectValues = "Please input correct email and password",
+}
+
 const Task1 = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [hasError, setHasError] = useState(false);
+  const [error, setError] = useState<LoginFormError | null>(null);
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (email !== EMAIL || password !== PASSWORD) return setHasError(true);
+
+    if (!email || !password) return setError(LoginFormError.empty);
+
+    if (email !== EMAIL || password !== PASSWORD)
+      return setError(LoginFormError.incorrectValues);
+
     alert(`Email: ${email} \nPassword: ${password}`);
   };
 
-  const onClickForgotPassword = () => {
-    alert(
-      `Correct credentials: \nEmail: test@test.com \nPassword: test1 \nTry to use incorrect values to see error response`
-    );
-  };
+  const alternativeLoginButtons = [
+    {
+      label: "Google",
+      icon: <GoogleIcon className="social-media-icon" />,
+    },
+    {
+      label: "Facebook",
+      icon: <FacebookIcon className="social-media-icon" />,
+    },
+    {
+      label: "Apple",
+      icon: <AppleIcon className="social-media-icon" />,
+    },
+  ];
 
   return (
     <div id="task-1">
@@ -30,30 +52,39 @@ const Task1 = () => {
         <header className="header-container">
           <h1 className="header-text">Log in</h1>
         </header>
-        <form onSubmit={onSubmit} className="form-container">
+        <form onSubmit={onSubmit} className="form-container" noValidate>
           <p className="form-header">Welcome back!</p>
+          <div className="alternative-login-container">
+            {alternativeLoginButtons.map((method, i) => (
+              <button
+                key={i}
+                className="secondary-button"
+                type="button"
+                onClick={() => {}}
+              >
+                {method.icon}Continue with {method.label}
+              </button>
+            ))}
+          </div>
+          <div className="divider-container">
+            <div className="divider" />
+            <span>or</span>
+            <div className="divider" />
+          </div>
           <LoginInputForm
             email={email}
             password={password}
             setEmail={(e) => {
               setEmail(e.currentTarget.value);
-              setHasError(false);
+              setError(null);
             }}
             setPassword={(e) => {
               setPassword(e.currentTarget.value);
-              setHasError(false);
+              setError(null);
             }}
-            hasError={hasError}
+            error={error}
           />
-          <div className="submit-button-container">
-            <button className="primary-button">Continue</button>
-            <button
-              className="secondary-button"
-              onClick={onClickForgotPassword}
-            >
-              Forgot password?
-            </button>
-          </div>
+          <button className="primary-button">Log in</button>
         </form>
       </div>
     </div>

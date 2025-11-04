@@ -7,7 +7,7 @@ interface LoginInputFormProps {
   password: string;
   setEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
   setPassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  hasError: boolean;
+  error: string | null;
 }
 
 export const LoginInputForm = ({
@@ -15,14 +15,25 @@ export const LoginInputForm = ({
   password,
   setEmail,
   setPassword,
-  hasError,
+  error,
 }: LoginInputFormProps) => {
+  const onClickForgotPassword = () => {
+    alert(
+      `Correct credentials: \nEmail: test@test.com \nPassword: test1 \nTry to use incorrect values to see error response`
+    );
+  };
+
   return (
     <div className="login-input-form-container">
-      <div className={`login-input-group ${hasError ? "has-error" : ""}`}>
+      {error ? (
+        <div className="error-message">
+          <p>{error}</p>
+        </div>
+      ) : null}
+      <div className={`login-input-group ${error ? "has-error" : ""}`}>
         <div
           className={`floating-input ${email ? "has-value" : ""} ${
-            hasError ? "has-error" : ""
+            error ? "has-error" : ""
           }`}
         >
           <input
@@ -35,10 +46,10 @@ export const LoginInputForm = ({
           />
           <label htmlFor="email">Email</label>
         </div>
-        <div className={`separator ${hasError ? "has-error" : ""}`}></div>
+        <div className={`separator ${error ? "has-error" : ""}`} />
         <div
           className={`floating-input ${password ? "has-value" : ""} ${
-            hasError ? "has-error" : ""
+            error ? "has-error" : ""
           } `}
         >
           <input
@@ -52,8 +63,10 @@ export const LoginInputForm = ({
           <label htmlFor="password">Password</label>
         </div>
       </div>
-      <div className={`error-message ${hasError ? "has-error" : ""}`}>
-        <p>Incorrect email or password</p>
+      <div>
+        <p className="forgot-password-text" onClick={onClickForgotPassword}>
+          Forgot password?
+        </p>
       </div>
     </div>
   );

@@ -3,13 +3,15 @@ $color-black: #000;
 $color-white: #fff;
 $color-gray-700: #707070;
 $color-gray-200: #e0e0e0;
-$primary-color: #89ab3d;
+$color-gray-100: #f0f0f0;
+$primary-color: #86b111;
+$primary-color-light: #aac858;
 $error-color: #f72c5b;
 $error-color-bg: #feeaef;
 
 // Font
 $font-stack: Open Sans, sans-serif;
-$font-size-small: 0.75rem;
+$font-size-small: 0.85rem;
 $font-size-normal: 1rem;
 $font-size-large: 1.5rem;
 $font-weight-bold: 600;
@@ -19,7 +21,8 @@ $color-text-secondary: $color-gray-700;
 // Borders
 $border-radius: 0.5rem;
 $border-radius-small: 0.5rem;
-$border-width: 1px;
+$border-width-basic: 1px;
+$border-width-lg: 2px;
 $color-border: $color-gray-200;
 
 // Background and spacings
@@ -29,3 +32,14 @@ $space-normal: 1rem;
 $space-large: 1.5rem;
 $space-xlarge: 2rem;
 $color-background: $color-white;
+
+// Animations
+$basic-transition: all 0.3s ease;
+
+// Elevation tokens
+$shadow-light: 0 1px 2px rgba(0, 0, 0, 0.06);
+$shadow-basic: 0 8px 24px rgba(0, 0, 0, 0.188);
+//$shadow-basic: 0 8px 24px rgb(172, 196, 119);
+
+// Optional focus ring color
+$focus-ring: rgba(0, 0, 0, 0.35);

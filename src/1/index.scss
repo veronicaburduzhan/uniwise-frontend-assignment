@@ -1,5 +1,7 @@
 @use "variables" as *;
 @forward "variables";
+@use "breakpoints" as *;
+@forward "breakpoints";
 
 *,
 *::before,
@@ -10,21 +12,36 @@
 p {
   line-height: 1.5;
   margin: 0;
+  font-size: $font-size-small;
+
+  @include respond-above("xs") {
+    font-size: $font-size-normal;
+  }
 }
 
 button {
   width: 100%;
+  display: flex;
   font-family: $font-stack;
-  font-size: $font-size-normal;
-  padding: $space-normal $space-small;
-  border: 1px solid $primary-color;
+  padding: $space-small;
+  border: $border-width-lg solid $color-black;
   border-radius: $border-radius-small;
-  transition: all 0.5s ease;
+  transition: $basic-transition;
   cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: $space-xsmall;
+  background-color: $primary-color;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-small;
 
-  &:hover {
-    background-color: $color-white;
-    color: $primary-color;
+  @include respond-above("xs") {
+    font-size: $font-size-normal;
+  }
+
+  &:active {
+    box-shadow: $shadow-light;
+    transform: translateY(1px);
   }
 }
 
@@ -45,7 +62,7 @@ header {
 /* DO NOT CHANGE THIS ROOT CLASS NAME*/
 #task-1 {
   .main-container {
-    border: $border-width solid $color-border;
+    border: $border-width-basic solid $color-border;
     border-radius: $border-radius;
     width: 100%;
     max-width: 600px;
@@ -57,8 +74,20 @@ header {
 
   .form-container {
     display: flex;
-    padding: $space-xlarge 7.5em;
-    gap: $space-normal;
+    padding: $space-xlarge 1em;
+    gap: $space-large;
+
+    @include respond-above("xs") {
+      padding: $space-xlarge 3em;
+    }
+
+    @include respond-above("sm") {
+      padding: $space-xlarge 5em;
+    }
+
+    @include respond-above("md") {
+      padding: $space-xlarge 7.5em;
+    }
   }
 
   .header-container {
@@ -68,50 +97,85 @@ header {
     justify-content: center;
     text-align: center;
     margin: 0;
-    border-bottom: $border-width solid $color-border;
+    border-bottom: $border-width-basic solid $color-border;
   }
 
   .header-text {
     font-weight: $font-weight-bold;
-    font-size: $font-size-normal;
     margin: 0;
     padding: $space-normal;
+    font-size: $font-size-small;
+
+    @include respond-above("xs") {
+      font-size: $font-size-normal;
+    }
   }
 
   .form-header {
     font-weight: $font-weight-bold;
-    font-size: $font-size-large;
+    font-size: $font-size-normal;
     margin: 0;
+
+    @include respond-above("xs") {
+      font-size: $font-size-large;
+    }
   }
 
-  .submit-button-container {
+  .divider-container {
+    display: flex;
+    gap: $space-normal;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .divider {
+    height: $border-width-basic;
+    width: 100%;
+    background-color: $color-border;
+  }
+
+  .alternative-login-container {
     display: flex;
     flex-direction: column;
     width: 100%;
-    align-items: center;
-    gap: $space-xsmall;
+    gap: $space-small;
   }
 
   .primary-button {
-    background-color: $primary-color;
-    color: $color-white;
-
     &:hover {
-      background-color: $color-white;
-      color: $primary-color;
+      box-shadow: $shadow-basic;
+      background-color: $primary-color-light;
+    }
+
+    &:active {
+      background-color: $color-black;
+      color: $color-white;
     }
   }
 
   .secondary-button {
-    width: fit-content;
-    font-size: $font-size-small;
-    padding: $space-xsmall;
-    border: none;
-    transition: all 0.5s ease;
+    color: $color-text-primary;
     background-color: $color-white;
+
+    &:hover {
+      background-color: $color-gray-100;
+      color: $color-text-primary;
+    }
+  }
+
+  .forgot-password-text {
+    font-size: $font-size-small;
+    text-decoration: underline;
+    transition: $basic-transition;
+    cursor: pointer;
 
     &:hover {
       color: $primary-color;
     }
+  }
+
+  .social-media-icon {
+    width: 1.2rem;
+    height: 1.2rem;
   }
 }

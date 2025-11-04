@@ -1,4 +1,5 @@
 @use "../variables" as *;
+@use "../breakpoints" as *;
 
 .login-input-form-container {
   display: flex;
@@ -10,7 +11,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: $border-width solid $color-border;
+  border: $border-width-basic solid $color-border;
   border-radius: $border-radius-small;
 
   &:focus-within .separator {
@@ -24,21 +25,17 @@
 }
 
 .separator {
-  height: $border-width;
+  height: $border-width-basic;
   width: 100%;
   background-color: $color-border;
-
-  // &.has-error {
-  //   background-color: $error-color;
-  // }
 }
 
 .floating-input {
   display: flex;
   position: relative;
   width: 100%;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-  border: 1px solid transparent;
+  transition: $basic-transition;
+  border: $border-width-lg solid transparent;
   border-radius: $border-radius-small;
 
   &:focus-within {
@@ -51,8 +48,8 @@
 
   input {
     width: 100%;
-    margin-top: 0.3rem;
-    padding: $space-normal $space-small;
+    margin-top: 0.5rem;
+    padding: $space-normal $space-small $space-small;
     font-size: $font-size-normal;
     border: none;
     outline: none;
@@ -73,7 +70,7 @@
     left: $space-small;
     color: $color-text-secondary;
     pointer-events: none;
-    transition: all 0.2s ease;
+    transition: $basic-transition;
     background: transparent;
   }
 
@@ -87,11 +84,10 @@
 }
 
 .error-message {
-  color: $error-color;
-  font-size: $font-size-small;
-  visibility: hidden;
+  display: flex;
 
-  &.has-error {
-    visibility: visible;
+  p {
+    color: $error-color;
+    font-size: $font-size-small;
   }
 }
