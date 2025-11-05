@@ -1,19 +1,31 @@
-import { FunctionComponent } from "react";
+import "../index.scss";
+import { User } from "./List";
+import { ReactComponent as AccountIcon } from "../assets/account_circle.svg";
 
-/*
- * The ItemProps interface defines the types for the components props.
- *
- * If you would like to proceed without defining types do the following:
- * const Input: FunctionComponent<any> = (props) => {
- *                                ^^^
- *
- * and remove the ItemProps interface
- */
+interface ItemProps {
+  item: User;
+}
 
-interface ItemProps {}
+const Item = ({ item }: ItemProps) => {
+  const { firstName, gender, age } = item;
 
-const Item: FunctionComponent<ItemProps> = (props) => {
-  return <li>#Item goes here#</li>;
+  const capitalizedGender =
+    gender.charAt(0).toUpperCase() + gender.slice(1).toLowerCase();
+
+  return (
+    <li>
+      <div className="account-container">
+        <AccountIcon className="account-icon" />
+        <div className="name-age-container">
+          <p className="name-text">{firstName}</p>
+          <p>{age} years old</p>
+        </div>
+      </div>
+      <div className="gender-tag">
+        <p>{capitalizedGender}</p>
+      </div>
+    </li>
+  );
 };
 
 export default Item;

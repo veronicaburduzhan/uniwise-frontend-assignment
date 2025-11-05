@@ -1,20 +1,20 @@
-import { FunctionComponent } from "react";
+import "../index.scss";
 
-/*
- * The InputProps interface defines the types for the components props.
- *
- * If you would like to proceed without defining types do the following:
- * const Input: FunctionComponent<any> = (props) => {
- *                                ^^^
- *
- * and remove the InputProps interface
- */
+interface InputProps {
+  searchTerm: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
 
-interface InputProps {}
-
-const Input: FunctionComponent<InputProps> = (props) => {
+const Input = ({ searchTerm, onChange }: InputProps) => {
   return (
-    <div>#Input goes here#</div>
+    <div className="search-container">
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={onChange}
+        placeholder="Search users..."
+      />
+    </div>
   );
 };
 

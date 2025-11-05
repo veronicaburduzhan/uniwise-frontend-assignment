@@ -1,0 +1,172 @@
+@use "../variables" as *;
+@use "../breakpoints" as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+#task-2 {
+  p {
+    line-height: 1.5;
+    margin: 0;
+    font-size: $font-size-sm;
+
+    @include respond-above("sm") {
+      font-size: $font-size-md;
+    }
+  }
+
+  input {
+    width: 100%;
+    font-size: $font-size-sm;
+    background: transparent;
+    border: $border-width solid $color-border;
+    border-radius: $border-radius;
+    padding: $space-md $space-sm;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    gap: $space-md;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  li {
+    display: flex;
+    border: $border-width solid $color-border;
+    border-radius: $border-radius;
+    padding: $space-lg;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: $space-md;
+
+    @include respond-above("sm") {
+      flex-direction: row;
+    }
+  }
+
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    justify-self: center;
+    justify-content: center;
+    width: 100%;
+    font-family: $font-stack;
+    background-color: $color-background;
+    color: $color-text-primary;
+    max-width: 600px;
+    gap: $space-md;
+  }
+
+  .list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .search-container {
+    display: flex;
+    width: 100%;
+  }
+
+  .toolbar {
+    display: flex;
+    gap: $space-md;
+    width: 100%;
+    align-items: center;
+    flex-direction: column;
+
+    @include respond-above("sm") {
+      flex-direction: row;
+    }
+  }
+
+  .toolbar-select-menu {
+    display: flex;
+    gap: $space-md;
+    width: 100%;
+    align-items: center;
+    flex: 1;
+  }
+
+  select {
+    display: flex;
+    padding: $space-md $space-sm;
+    margin: 0;
+    border: $border-width solid $color-border;
+    border-radius: $border-radius;
+    appearance: none;
+    background-image: url("data:image/svg+xml,<svg fill='%23999' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right $space-sm center;
+    background-size: 1.2rem;
+    min-width: 100px;
+    font-size: $font-size-sm;
+  }
+
+  .account-container {
+    display: flex;
+    gap: $space-lg;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    @include respond-above("sm") {
+      flex-direction: row;
+    }
+  }
+
+  .name-age-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: $font-size-sm;
+    }
+
+    .name-text {
+      font-size: $font-size-lg;
+      font-weight: $font-weight-bold;
+    }
+
+    @include respond-above("sm") {
+      align-items: flex-start;
+    }
+  }
+
+  .gender-tag {
+    border: $border-width solid $color-gray-200;
+    border-radius: $border-radius-full;
+    padding: $space-xs $space-sm;
+
+    p {
+      font-size: $font-size-sm;
+      line-height: 1;
+    }
+  }
+
+  .account-icon {
+    width: 4rem;
+    height: 4rem;
+
+    @include respond-above("sm") {
+      width: 3rem;
+      height: 3rem;
+    }
+  }
+
+  .no-items-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    margin: $space-xl 0;
+  }
+}
