@@ -1,7 +1,7 @@
 // Style
 import { useState } from "react";
 import "./index.scss";
-import { LoginInputForm } from "./LoginInput/LoginInputForm";
+import { LoginFormError, LoginInputForm } from "./LoginInput/LoginInputForm";
 import { ReactComponent as GoogleIcon } from "./assets/google-icon.svg";
 import { ReactComponent as AppleIcon } from "./assets/apple-icon.svg";
 import { ReactComponent as FacebookIcon } from "./assets/facebook-icon.svg";
@@ -10,28 +10,17 @@ import { ReactComponent as FacebookIcon } from "./assets/facebook-icon.svg";
 const EMAIL = "test@test.com";
 const PASSWORD = "test1";
 
-enum LoginFormError {
-  empty = "Please fill in missing fields",
-  incorrectValues = "Please input correct email and password",
-}
+type LoginButton = {
+  label: string;
+  icon: JSX.Element;
+};
 
 const Task1 = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<LoginFormError | null>(null);
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!email || !password) return setError(LoginFormError.empty);
-
-    if (email !== EMAIL || password !== PASSWORD)
-      return setError(LoginFormError.incorrectValues);
-
-    alert(`Email: ${email} \nPassword: ${password}`);
-  };
-
-  const alternativeLoginButtons = [
+  const alternativeLoginButtons: LoginButton[] = [
     {
       label: "Google",
       icon: <GoogleIcon className="social-media-icon" />,
@@ -45,6 +34,27 @@ const Task1 = () => {
       icon: <AppleIcon className="social-media-icon" />,
     },
   ];
+
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value);
+    setError(null);
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.currentTarget.value);
+    setError(null);
+  };
+
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!email || !password) return setError(LoginFormError.empty);
+
+    if (email !== EMAIL || password !== PASSWORD)
+      return setError(LoginFormError.incorrectValues);
+
+    alert(`Email: ${email} \nPassword: ${password}`);
+  };
 
   return (
     <div id="task-1">
@@ -74,14 +84,8 @@ const Task1 = () => {
           <LoginInputForm
             email={email}
             password={password}
-            setEmail={(e) => {
-              setEmail(e.currentTarget.value);
-              setError(null);
-            }}
-            setPassword={(e) => {
-              setPassword(e.currentTarget.value);
-              setError(null);
-            }}
+            setEmail={handleEmailChange}
+            setPassword={handlePasswordChange}
             error={error}
           />
           <button className="primary-button">Log in</button>

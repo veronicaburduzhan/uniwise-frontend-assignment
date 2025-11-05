@@ -4,28 +4,27 @@
 .login-input-form-container {
   display: flex;
   flex-direction: column;
-  gap: $space-xsmall;
+  gap: $space-xs;
 }
 
 .login-input-group {
   display: flex;
   flex-direction: column;
   width: 100%;
-  border: $border-width-basic solid $color-border;
-  border-radius: $border-radius-small;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius;
 
   &:focus-within .separator {
     background-color: transparent;
   }
 
   &.has-error {
-    border-color: $color-border;
     background-color: $error-color-bg;
   }
 }
 
 .separator {
-  height: $border-width-basic;
+  height: $border-width;
   width: 100%;
   background-color: $color-border;
 }
@@ -36,7 +35,9 @@
   width: 100%;
   transition: $basic-transition;
   border: $border-width-lg solid transparent;
-  border-radius: $border-radius-small;
+  border-radius: $border-radius;
+  align-items: center;
+  padding: $space-md $space-sm $space-sm;
 
   &:focus-within {
     border-color: $color-black;
@@ -48,26 +49,17 @@
 
   input {
     width: 100%;
-    margin-top: 0.5rem;
-    padding: $space-normal $space-small $space-small;
-    font-size: $font-size-normal;
+    margin-top: $space-xs;
+    font-size: $font-size-md;
     border: none;
     outline: none;
     background: transparent;
-
-    &:focus + label,
-    .has-value & + label {
-      top: 0.3rem;
-      left: 0.6rem;
-      font-size: $font-size-small;
-      padding: 0 0.25rem;
-    }
   }
 
   label {
     position: absolute;
-    top: $space-normal;
-    left: $space-small;
+    top: $space-md;
+    left: $space-sm;
     color: $color-text-secondary;
     pointer-events: none;
     transition: $basic-transition;
@@ -77,8 +69,8 @@
   input:focus + label,
   &.has-value label {
     top: 0.3rem;
-    left: 0.5rem;
-    font-size: $font-size-small;
+    left: 0.6rem;
+    font-size: $font-size-sm;
     padding: 0 0.25rem;
   }
 }
@@ -88,6 +80,17 @@
 
   p {
     color: $error-color;
-    font-size: $font-size-small;
+    font-size: $font-size-sm;
+  }
+}
+
+.material-symbols-outlined {
+  color: $color-gray-700;
+  font-size: $font-size-lg;
+  transition: $basic-transition;
+
+  &:hover {
+    color: $color-black;
+    cursor: pointer;
   }
 }

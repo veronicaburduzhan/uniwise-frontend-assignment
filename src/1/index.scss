@@ -1,7 +1,5 @@
 @use "variables" as *;
-@forward "variables";
 @use "breakpoints" as *;
-@forward "breakpoints";
 
 *,
 *::before,
@@ -12,10 +10,10 @@
 p {
   line-height: 1.5;
   margin: 0;
-  font-size: $font-size-small;
+  font-size: $font-size-sm;
 
-  @include respond-above("xs") {
-    font-size: $font-size-normal;
+  @include respond-above("sm") {
+    font-size: $font-size-md;
   }
 }
 
@@ -23,25 +21,30 @@ button {
   width: 100%;
   display: flex;
   font-family: $font-stack;
-  padding: $space-small;
+  padding: $space-sm;
   border: $border-width-lg solid $color-black;
-  border-radius: $border-radius-small;
+  border-radius: $border-radius;
   transition: $basic-transition;
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  gap: $space-xsmall;
+  gap: $space-xs;
   background-color: $primary-color;
   font-weight: $font-weight-bold;
-  font-size: $font-size-small;
+  font-size: $font-size-sm;
 
-  @include respond-above("xs") {
-    font-size: $font-size-normal;
+  @include respond-above("sm") {
+    font-size: $font-size-md;
   }
 
   &:active {
     box-shadow: $shadow-light;
     transform: translateY(1px);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $primary-color;
+    outline-offset: 2px;
   }
 }
 
@@ -62,31 +65,28 @@ header {
 /* DO NOT CHANGE THIS ROOT CLASS NAME*/
 #task-1 {
   .main-container {
-    border: $border-width-basic solid $color-border;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: $border-width solid $color-border;
     border-radius: $border-radius;
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
-    font: 100% $font-stack;
+    font-family: $font-stack;
     background-color: $color-background;
     color: $color-text-primary;
   }
 
   .form-container {
     display: flex;
-    padding: $space-xlarge 1em;
-    gap: $space-large;
-
-    @include respond-above("xs") {
-      padding: $space-xlarge 3em;
-    }
+    padding: $space-xl $space-md;
+    justify-content: center;
+    width: 100%;
+    gap: $space-lg;
 
     @include respond-above("sm") {
-      padding: $space-xlarge 5em;
-    }
-
-    @include respond-above("md") {
-      padding: $space-xlarge 7.5em;
+      max-width: 400px;
     }
   }
 
@@ -97,39 +97,40 @@ header {
     justify-content: center;
     text-align: center;
     margin: 0;
-    border-bottom: $border-width-basic solid $color-border;
+    border-bottom: $border-width solid $color-border;
+    width: 100%;
   }
 
   .header-text {
     font-weight: $font-weight-bold;
     margin: 0;
-    padding: $space-normal;
-    font-size: $font-size-small;
+    padding: $space-md;
+    font-size: $font-size-sm;
 
-    @include respond-above("xs") {
-      font-size: $font-size-normal;
+    @include respond-above("sm") {
+      font-size: $font-size-md;
     }
   }
 
   .form-header {
     font-weight: $font-weight-bold;
-    font-size: $font-size-normal;
+    font-size: $font-size-md;
     margin: 0;
 
-    @include respond-above("xs") {
-      font-size: $font-size-large;
+    @include respond-above("sm") {
+      font-size: $font-size-lg;
     }
   }
 
   .divider-container {
     display: flex;
-    gap: $space-normal;
+    gap: $space-md;
     justify-content: center;
     align-items: center;
   }
 
   .divider {
-    height: $border-width-basic;
+    height: $border-width;
     width: 100%;
     background-color: $color-border;
   }
@@ -138,7 +139,7 @@ header {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: $space-small;
+    gap: $space-sm;
   }
 
   .primary-button {
@@ -163,11 +164,26 @@ header {
     }
   }
 
-  .forgot-password-text {
-    font-size: $font-size-small;
+  .text-button {
+    font-size: $font-size-sm;
     text-decoration: underline;
     transition: $basic-transition;
-    cursor: pointer;
+    border: none;
+    background: none;
+    width: fit-content;
+    padding: 0;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+
+  .icon-button {
+    transition: $basic-transition;
+    border: none;
+    background: none;
+    width: fit-content;
+    padding: 0;
 
     &:hover {
       color: $primary-color;

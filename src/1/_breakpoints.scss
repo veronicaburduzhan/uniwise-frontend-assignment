@@ -1,11 +1,9 @@
 $breakpoints: (
-  "xs": 480px,
-  "sm": 560px,
+  "sm": 480px,
   "md": 768px,
   "lg": 1024px,
 );
 
-$breakpoint-xs: map-get($breakpoints, "xs");
 $breakpoint-sm: map-get($breakpoints, "sm");
 $breakpoint-md: map-get($breakpoints, "md");
 $breakpoint-lg: map-get($breakpoints, "lg");
@@ -17,6 +15,6 @@ $breakpoint-lg: map-get($breakpoints, "lg");
       @content;
     }
   } @else {
-    @warn "No breakpoint named `#{$size}` found in $breakpoints map.";
+    @warn "No breakpoint named `#{$size}` found.";
   }
 }

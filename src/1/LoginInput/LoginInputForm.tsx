@@ -1,6 +1,12 @@
 // Style
+import { useState } from "react";
 import "../index.scss";
 import "./LoginInputForm.scss";
+
+export enum LoginFormError {
+  empty = "Please fill in missing fields",
+  incorrectValues = "Please input correct email and password",
+}
 
 interface LoginInputFormProps {
   email: string;
@@ -17,24 +23,37 @@ export const LoginInputForm = ({
   setPassword,
   error,
 }: LoginInputFormProps) => {
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const [inputPasswordType, setInputPasswordType] = useState("password");
+
+  const errorClass = error ? "has-error" : "";
+
   const onClickForgotPassword = () => {
     alert(
       `Correct credentials: \nEmail: test@test.com \nPassword: test1 \nTry to use incorrect values to see error response`
     );
   };
 
+  const handlePasswordVisibility = () => {
+    setIsPasswordVisible(!isPasswordVisible);
+
+    if (inputPasswordType === "password") return setInputPasswordType("text");
+
+    return setInputPasswordType("password");
+  };
+
   return (
     <div className="login-input-form-container">
       {error ? (
         <div className="error-message">
-          <p>{error}</p>
+          <p id="login-error" role="alert">
+            {error}
+          </p>
         </div>
       ) : null}
-      <div className={`login-input-group ${error ? "has-error" : ""}`}>
+      <div className={`login-input-group ${errorClass}`}>
         <div
-          className={`floating-input ${email ? "has-value" : ""} ${
-            error ? "has-error" : ""
-          }`}
+          className={`floating-input ${email ? "has-value" : ""} ${errorClass}`}
         >
           <input
             type="email"
@@ -43,30 +62,46 @@ export const LoginInputForm = ({
             value={email}
             onChange={setEmail}
             required
+            aria-invalid={!!error}
+            aria-describedby={error ? "login-error" : undefined}
           />
           <label htmlFor="email">Email</label>
         </div>
-        <div className={`separator ${error ? "has-error" : ""}`} />
+        <div className={`separator ${errorClass}`} />
         <div
-          className={`floating-input ${password ? "has-value" : ""} ${
-            error ? "has-error" : ""
-          } `}
+          className={`floating-input ${
+            password ? "has-value" : ""
+          } ${errorClass} `}
         >
           <input
-            type="password"
+            type={inputPasswordType}
             name="password"
             id="password"
             value={password}
             onChange={setPassword}
             required
+            aria-invalid={!!error}
+            aria-describedby={error ? "login-error" : undefined}
           />
           <label htmlFor="password">Password</label>
+          <button
+            className="material-symbols-outlined icon-button"
+            onClick={handlePasswordVisibility}
+            aria-label={isPasswordVisible ? "Hide password" : "Show password"}
+            type="button"
+          >
+            {isPasswordVisible ? "visibility" : "visibility_off"}
+          </button>
         </div>
       </div>
       <div>
-        <p className="forgot-password-text" onClick={onClickForgotPassword}>
+        <button
+          className="text-button"
+          onClick={onClickForgotPassword}
+          type="button"
+        >
           Forgot password?
-        </p>
+        </button>
       </div>
     </div>
   );

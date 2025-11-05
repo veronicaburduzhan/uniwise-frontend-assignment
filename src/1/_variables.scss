@@ -1,45 +1,45 @@
-// Color palette
+// COLOR SYSTEM
+
+// Neutral palette
 $color-black: #000;
 $color-white: #fff;
 $color-gray-700: #707070;
 $color-gray-200: #e0e0e0;
 $color-gray-100: #f0f0f0;
+// Brand colors
 $primary-color: #86b111;
 $primary-color-light: #aac858;
+// Status colors
 $error-color: #f72c5b;
 $error-color-bg: #feeaef;
-
-// Font
-$font-stack: Open Sans, sans-serif;
-$font-size-small: 0.85rem;
-$font-size-normal: 1rem;
-$font-size-large: 1.5rem;
-$font-weight-bold: 600;
+// Text
 $color-text-primary: $color-black;
 $color-text-secondary: $color-gray-700;
-
-// Borders
-$border-radius: 0.5rem;
-$border-radius-small: 0.5rem;
-$border-width-basic: 1px;
-$border-width-lg: 2px;
+// Background, borders, etc.
+$color-background: $color-white;
 $color-border: $color-gray-200;
 
-// Background and spacings
-$space-xsmall: 0.5rem;
-$space-small: 0.75rem;
-$space-normal: 1rem;
-$space-large: 1.5rem;
-$space-xlarge: 2rem;
-$color-background: $color-white;
+// TYPOGRAPHY
+$font-stack: Open Sans, sans-serif;
+$font-size-sm: 0.85rem;
+$font-size-md: 1rem;
+$font-size-lg: 1.5rem;
+$font-weight-bold: 600;
 
-// Animations
+// BORDERS
+$border-radius: 0.5rem;
+$border-width: 1px;
+$border-width-lg: 2px;
+
+// LAYOUT & SPACINGS
+$space-xs: 0.5rem;
+$space-sm: 0.75rem;
+$space-md: 1rem;
+$space-lg: 1.5rem;
+$space-xl: 2rem;
+
+// EFFECTS
 $basic-transition: all 0.3s ease;
-
-// Elevation tokens
+// Shadows
 $shadow-light: 0 1px 2px rgba(0, 0, 0, 0.06);
 $shadow-basic: 0 8px 24px rgba(0, 0, 0, 0.188);
-//$shadow-basic: 0 8px 24px rgb(172, 196, 119);
-
-// Optional focus ring color
-$focus-ring: rgba(0, 0, 0, 0.35);
