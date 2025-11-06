@@ -13,6 +13,8 @@ const Input = ({ searchTerm, onChange }: InputProps) => {
         value={searchTerm}
         onChange={onChange}
         placeholder="Search users..."
+        name="search"
+        id="search"
       />
     </div>
   );
