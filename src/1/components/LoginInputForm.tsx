@@ -1,7 +1,6 @@
 // Style
 import { useState } from "react";
 import "../index.scss";
-import "./LoginInputForm.scss";
 
 export enum LoginFormError {
   empty = "Please fill in missing fields",

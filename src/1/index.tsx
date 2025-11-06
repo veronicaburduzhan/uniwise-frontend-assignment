@@ -1,7 +1,7 @@
 // Style
 import { useState } from "react";
 import "./index.scss";
-import { LoginFormError, LoginInputForm } from "./LoginInput/LoginInputForm";
+import { LoginFormError, LoginInputForm } from "./components/LoginInputForm";
 import { ReactComponent as GoogleIcon } from "./assets/google-icon.svg";
 import { ReactComponent as AppleIcon } from "./assets/apple-icon.svg";
 import { ReactComponent as FacebookIcon } from "./assets/facebook-icon.svg";
@@ -76,10 +76,10 @@ const Task1 = () => {
               </button>
             ))}
           </div>
-          <div className="divider-container">
-            <div className="divider" />
+          <div className="separator-container">
+            <div className="separator" />
             <span>or</span>
-            <div className="divider" />
+            <div className="separator" />
           </div>
           <LoginInputForm
             email={email}

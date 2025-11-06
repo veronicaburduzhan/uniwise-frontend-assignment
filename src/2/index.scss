@@ -1,6 +1,39 @@
 @use "../variables" as *;
 @use "../breakpoints" as *;
 
+%flex-full-width {
+  display: flex;
+  width: 100%;
+}
+
+%flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+%action {
+  font-size: $font-size-sm;
+  background: transparent;
+  border: $border-width solid $color-border;
+  border-radius: $border-radius;
+  padding: $space-md $space-sm;
+  width: 100%;
+}
+
+%card {
+  border: $border-width solid $color-border;
+  border-radius: $border-radius;
+}
+
+@mixin responsive-settings($gap: $space-md) {
+  @extend %flex-column;
+  gap: $gap;
+
+  @include respond-above("sm") {
+    flex-direction: row;
+  }
+}
+
 *,
 *::before,
 *::after {
@@ -18,18 +51,23 @@
     }
   }
 
-  input {
-    width: 100%;
-    font-size: $font-size-sm;
-    background: transparent;
-    border: $border-width solid $color-border;
-    border-radius: $border-radius;
-    padding: $space-md $space-sm;
+  input,
+  select {
+    @extend %action;
+  }
+
+  select {
+    margin: 0;
+    appearance: none;
+    background-image: url("data:image/svg+xml,<svg fill='%23999' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right $space-sm center;
+    background-size: 1.2rem;
+    min-width: 100px;
   }
 
   ul {
-    display: flex;
-    flex-direction: column;
+    @extend %flex-column;
     gap: $space-md;
     margin: 0;
     padding: 0;
@@ -37,23 +75,15 @@
   }
 
   li {
-    display: flex;
-    border: $border-width solid $color-border;
-    border-radius: $border-radius;
+    @extend %card;
     padding: $space-lg;
     align-items: center;
     justify-content: space-between;
-    flex-direction: column;
-    gap: $space-md;
-
-    @include respond-above("sm") {
-      flex-direction: row;
-    }
+    @include responsive-settings();
   }
 
   .main-container {
-    display: flex;
-    flex-direction: column;
+    @extend %flex-column;
     justify-self: center;
     justify-content: center;
     width: 100%;
@@ -64,67 +94,36 @@
     gap: $space-md;
   }
 
-  .list-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  .list-container,
+  .search-container {
+    @extend %flex-full-width;
   }
 
-  .search-container {
-    display: flex;
-    width: 100%;
+  .list-container {
+    flex-direction: column;
   }
 
   .toolbar {
-    display: flex;
-    gap: $space-md;
+    @include responsive-settings();
     width: 100%;
     align-items: center;
-    flex-direction: column;
-
-    @include respond-above("sm") {
-      flex-direction: row;
-    }
   }
 
   .toolbar-select-menu {
-    display: flex;
+    @extend %flex-full-width;
     gap: $space-md;
-    width: 100%;
     align-items: center;
     flex: 1;
   }
 
-  select {
-    display: flex;
-    padding: $space-md $space-sm;
-    margin: 0;
-    border: $border-width solid $color-border;
-    border-radius: $border-radius;
-    appearance: none;
-    background-image: url("data:image/svg+xml,<svg fill='%23999' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-    background-repeat: no-repeat;
-    background-position: right $space-sm center;
-    background-size: 1.2rem;
-    min-width: 100px;
-    font-size: $font-size-sm;
-  }
-
   .account-container {
-    display: flex;
-    gap: $space-lg;
+    @include responsive-settings($space-lg);
     align-items: center;
     justify-content: center;
-    flex-direction: column;
-
-    @include respond-above("sm") {
-      flex-direction: row;
-    }
   }
 
   .name-age-container {
-    display: flex;
-    flex-direction: column;
+    @extend %flex-column;
     justify-content: center;
     align-items: center;
 
@@ -143,7 +142,7 @@
   }
 
   .gender-tag {
-    border: $border-width solid $color-gray-200;
+    @extend %card;
     border-radius: $border-radius-full;
     padding: $space-xs $space-sm;
 
@@ -164,8 +163,7 @@
   }
 
   .no-items-container {
-    display: flex;
-    width: 100%;
+    @extend %flex-full-width;
     justify-content: center;
     margin: $space-xl 0;
   }

@@ -1,37 +1,41 @@
 @use "../variables" as *;
 @use "../breakpoints" as *;
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-p {
-  line-height: 1.5;
-  margin: 0;
-  font-size: $font-size-sm;
-
-  @include respond-above("sm") {
-    font-size: $font-size-md;
-  }
-}
-
-button {
-  width: 100%;
+%flex-column {
   display: flex;
+  flex-direction: column;
+}
+
+%flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+%flex-column-center {
+  @extend %flex-column;
+  align-items: center;
+  justify-content: center;
+}
+
+%card {
+  border: $border-width solid $color-border;
+  border-radius: $border-radius;
+}
+
+%button-base {
+  @extend %flex-center;
+  width: 100%;
+  gap: $space-xs;
   font-family: $font-stack;
+  font-weight: $font-weight-bold;
+  font-size: $font-size-sm;
   padding: $space-sm;
   border: $border-width-lg solid $color-black;
   border-radius: $border-radius;
-  transition: $basic-transition;
-  cursor: pointer;
-  align-items: center;
-  justify-content: center;
-  gap: $space-xs;
   background-color: $primary-color;
-  font-weight: $font-weight-bold;
-  font-size: $font-size-sm;
+  cursor: pointer;
+  transition: $basic-transition;
 
   @include respond-above("sm") {
     font-size: $font-size-md;
@@ -41,23 +45,51 @@ button {
     box-shadow: $shadow-light;
     transform: translateY(1px);
   }
-
   &:focus-visible {
     outline: 2px solid $primary-color;
     outline-offset: 2px;
   }
 }
 
+%button-naked {
+  font-size: $font-size-sm;
+  transition: $basic-transition;
+  background: none;
+  border: none;
+  width: fit-content;
+  padding: 0;
+}
+
+@mixin responsive-typography($small, $base) {
+  font-size: $small;
+
+  @include respond-above("sm") {
+    font-size: $base;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+p {
+  line-height: 1.5;
+  margin: 0;
+  @include responsive-typography($font-size-sm, $font-size-md);
+}
+
+button {
+  @extend %button-base;
+}
+
 form {
-  display: flex;
-  flex-direction: column;
+  @extend %flex-column;
 }
 
 header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  @extend %flex-column-center;
   text-align: center;
   margin-bottom: 20px;
 }
@@ -65,11 +97,8 @@ header {
 /* DO NOT CHANGE THIS ROOT CLASS NAME*/
 #task-1 {
   .main-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: $border-width solid $color-border;
-    border-radius: $border-radius;
+    @extend %flex-column-center;
+    @extend %card;
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
@@ -80,8 +109,8 @@ header {
 
   .form-container {
     display: flex;
-    padding: $space-xl $space-md;
     justify-content: center;
+    padding: $space-xl $space-md;
     width: 100%;
     gap: $space-lg;
 
@@ -91,10 +120,7 @@ header {
   }
 
   .header-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    @extend %flex-column-center;
     text-align: center;
     margin: 0;
     border-bottom: $border-width solid $color-border;
@@ -105,39 +131,22 @@ header {
     font-weight: $font-weight-bold;
     margin: 0;
     padding: $space-md;
-    font-size: $font-size-sm;
-
-    @include respond-above("sm") {
-      font-size: $font-size-md;
-    }
+    @include responsive-typography($font-size-sm, $font-size-md);
   }
 
   .form-header {
     font-weight: $font-weight-bold;
-    font-size: $font-size-md;
     margin: 0;
-
-    @include respond-above("sm") {
-      font-size: $font-size-lg;
-    }
+    @include responsive-typography($font-size-md, $font-size-lg);
   }
 
-  .divider-container {
-    display: flex;
+  .separator-container {
+    @extend %flex-center;
     gap: $space-md;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .divider {
-    height: $border-width;
-    width: 100%;
-    background-color: $color-border;
   }
 
   .alternative-login-container {
-    display: flex;
-    flex-direction: column;
+    @extend %flex-column;
     width: 100%;
     gap: $space-sm;
   }
@@ -164,34 +173,112 @@ header {
     }
   }
 
-  .text-button {
-    font-size: $font-size-sm;
-    text-decoration: underline;
-    transition: $basic-transition;
-    border: none;
-    background: none;
-    width: fit-content;
-    padding: 0;
+  .text-button,
+  .icon-button {
+    @extend %button-naked;
 
     &:hover {
       color: $primary-color;
     }
   }
 
-  .icon-button {
-    transition: $basic-transition;
-    border: none;
-    background: none;
-    width: fit-content;
-    padding: 0;
-
-    &:hover {
-      color: $primary-color;
-    }
+  .text-button {
+    text-decoration: underline;
   }
 
   .social-media-icon {
     width: 1.2rem;
     height: 1.2rem;
+  }
+
+  .login-input-form-container {
+    @extend %flex-column;
+    gap: $space-xs;
+  }
+
+  .login-input-group {
+    @extend %flex-column;
+    @extend %card;
+    width: 100%;
+
+    &:focus-within .separator {
+      background-color: transparent;
+    }
+
+    &.has-error {
+      background-color: $error-color-bg;
+    }
+  }
+
+  .separator {
+    height: $border-width;
+    width: 100%;
+    background-color: $color-border;
+  }
+
+  .floating-input {
+    display: flex;
+    position: relative;
+    width: 100%;
+    transition: $basic-transition;
+    border: $border-width-lg solid transparent;
+    border-radius: $border-radius;
+    align-items: center;
+    padding: $space-md $space-sm $space-sm;
+
+    &:focus-within {
+      border-color: $color-black;
+    }
+
+    &.has-error:focus-within {
+      border-color: $error-color;
+    }
+
+    input {
+      width: 100%;
+      margin-top: $space-xs;
+      font-size: $font-size-md;
+      border: none;
+      outline: none;
+      background: transparent;
+    }
+
+    label {
+      position: absolute;
+      top: $space-md;
+      left: $space-sm;
+      color: $color-text-secondary;
+      pointer-events: none;
+      transition: $basic-transition;
+      background: transparent;
+    }
+
+    input:focus + label,
+    &.has-value label {
+      top: 0.3rem;
+      left: 0.6rem;
+      font-size: $font-size-sm;
+      padding: 0 0.25rem;
+    }
+  }
+
+  .error-message {
+    display: flex;
+
+    p {
+      color: $error-color;
+      font-size: $font-size-sm;
+    }
+  }
+
+  .material-symbols-outlined {
+    color: $color-gray-700;
+    font-size: $font-size-lg;
+    transition: $basic-transition;
+
+    &:hover {
+      color: $color-black;
+      cursor: pointer;
+    }
   }
 }
