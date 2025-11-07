@@ -94,7 +94,6 @@ header {
   margin-bottom: 20px;
 }
 
-/* DO NOT CHANGE THIS ROOT CLASS NAME*/
 #task-1 {
   .main-container {
     @extend %flex-column-center;
@@ -184,6 +183,47 @@ header {
 
   .text-button {
     text-decoration: underline;
+  }
+
+  .remember-me-checkbox {
+    font-size: $font-size-sm;
+    display: flex;
+    align-items: center;
+    gap: $space-xs;
+    cursor: pointer;
+    user-select: none;
+
+    input[type="checkbox"] {
+      appearance: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      border: $border-width-lg solid $color-border;
+      border-radius: calc($border-radius / 2);
+      @extend %flex-center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+
+      &:hover {
+        border-color: $color-gray-700;
+      }
+
+      &:checked {
+        background-color: $primary-color;
+        border-color: $color-black;
+      }
+
+      &:checked::after {
+        content: "✔";
+        color: $color-text-primary;
+        font-size: $font-size-sm;
+        line-height: 1;
+      }
+
+      &:focus-visible {
+        outline: $border-width-lg solid $primary-color;
+        outline-offset: 2px;
+      }
+    }
   }
 
   .social-media-icon {

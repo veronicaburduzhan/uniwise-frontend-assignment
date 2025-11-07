@@ -1,4 +1,3 @@
-// Style
 import { useState } from "react";
 import "./index.scss";
 import { LoginFormError, LoginInputForm } from "./components/LoginInputForm";

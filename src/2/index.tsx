@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./index.scss";
 
-// Components
 import List, { User } from "./components/List";
 import Input from "./components/Input";
 import SelectMenu from "./components/SelectMenu";

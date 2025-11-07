@@ -1,4 +1,3 @@
-// Style
 import { useState } from "react";
 import "../index.scss";
 
@@ -42,10 +41,19 @@ export const LoginInputForm = ({
   };
 
   return (
-    <div className="login-input-form-container">
+    <div
+      className="login-input-form-container"
+      role="form"
+      aria-labelledby="login-form-title"
+    >
       {error ? (
         <div className="error-message">
-          <p id="login-error" role="alert">
+          <p
+            id="login-error"
+            role="alert"
+            aria-live="assertive"
+            aria-atomic="true"
+          >
             {error}
           </p>
         </div>
@@ -101,6 +109,12 @@ export const LoginInputForm = ({
         >
           Forgot password?
         </button>
+      </div>
+      <div>
+        <label className="remember-me-checkbox">
+          <input type="checkbox" id="remember-me" name="remember" />
+          Remember me?
+        </label>
       </div>
     </div>
   );
