@@ -24,10 +24,18 @@ const ActionBar = ({ filter, filterTodos, onOpenAddTodo }: ActionBarProps) => {
         type="button"
         className="primary-button material-symbols-outlined"
         onClick={onOpenAddTodo}
+        aria-label="Add a new todo"
+        title="Add a new todo"
       >
-        <span className="material-symbols-outlined">add_2</span>
+        <span className="material-symbols-outlined" aria-hidden="true">
+          add_2
+        </span>
       </button>
-      <div className="filter-status-container">
+      <div
+        className="filter-status-container"
+        role="group"
+        aria-label="Filter todos"
+      >
         {filterActions.map((action) => (
           <button
             type="button"
@@ -36,6 +44,7 @@ const ActionBar = ({ filter, filterTodos, onOpenAddTodo }: ActionBarProps) => {
             }`}
             key={action.value}
             onClick={() => handleFilter(action.value as TodoFilter)}
+            aria-pressed={filter === action.value}
           >
             {action.label}
           </button>

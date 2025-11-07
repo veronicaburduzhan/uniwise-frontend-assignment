@@ -45,6 +45,18 @@
   }
 }
 
+@mixin column-gap($gap) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+}
+
+@mixin row-gap($gap) {
+  display: flex;
+  flex-direction: row;
+  gap: $gap;
+}
+
 *,
 *::before,
 *::after {
@@ -59,7 +71,7 @@
   }
 
   .main-container {
-    @extend %flex-column;
+    @include column-gap($space-xl);
     justify-self: center;
     justify-content: center;
     width: 100%;
@@ -67,36 +79,31 @@
     background-color: $color-background;
     color: $color-text-primary;
     max-width: 500px;
-    gap: $space-xl;
+    margin-bottom: $space-xl * 3;
   }
 
   .todo-container {
-    @extend %flex-column;
-    gap: $space-md;
+    @include column-gap($space-md);
   }
 
   .list-container,
   .action-bar-container {
     @extend %flex-full-width;
-    flex-direction: column;
+    @include column-gap($space-md);
     align-items: center;
-    gap: $space-md;
   }
 
   .filter-status-container {
     @extend %flex-full-width;
-    gap: $space-sm;
-    flex-direction: column;
+    @include column-gap($space-sm);
 
     @include respond-above("sm") {
-      flex-direction: row;
-      gap: $space-md;
+      @include row-gap($space-md);
     }
   }
 
   ul {
-    @extend %flex-column;
-    gap: $space-md;
+    @include column-gap($space-md);
     margin: 0;
     padding: 0;
     width: 100%;
@@ -108,14 +115,12 @@
   }
 
   .checkbox-input {
-    display: flex;
-    align-items: center;
-    gap: $space-xs / 3;
+    @extend %flex-center;
+    gap: calc($space-xs / 3);
     transition: $basic-transition;
 
     @include respond-above("sm") {
-      flex-direction: row;
-      gap: $space-xs;
+      @include row-gap($space-xs);
     }
 
     input {
@@ -146,9 +151,12 @@
     gap: $space-sm;
 
     @include respond-above("sm") {
-      flex-direction: row;
       gap: $space-lg;
       padding: $space-lg;
+    }
+
+    &:focus-within {
+      border-color: $primary-color;
     }
   }
 
@@ -228,9 +236,8 @@
 
   form {
     @extend %flex-full-width;
-    flex-direction: row;
+    @include row-gap($space-sm);
     justify-content: space-between;
-    gap: $space-sm;
 
     @include respond-above("sm") {
       gap: $space-lg;
@@ -242,6 +249,16 @@
 
     button {
       width: fit-content;
+    }
+  }
+
+  .empty-list-text {
+    @extend %flex-center;
+    @include column-gap($space-sm);
+    margin-top: $space-xl;
+
+    .title {
+      font-size: $font-size-lg;
     }
   }
 }

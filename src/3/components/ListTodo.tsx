@@ -14,11 +14,15 @@ interface ListTodoProps {
 }
 
 const ListTodo = ({ items, onDelete, onEdit }: ListTodoProps) => {
-  if (!items || !items.length) return <NoTodo text="No users found" />;
+  if (!items || !items.length) return <NoTodo />;
 
   return (
-    <div className="list-container">
-      <ul>
+    <div className="list-container" role="region" aria-label="Todo list">
+      <ul
+        aria-label={`Todo items (${items.length})`}
+        aria-live="polite"
+        aria-relevant="additions removals"
+      >
         {items.map((item) => (
           <ItemTodo
             item={item}

@@ -1,4 +1,5 @@
 import "../index.scss";
+import IconButton, { IconButtonProps } from "./IconButton";
 
 interface ItemProps {
   id?: string;
@@ -9,6 +10,9 @@ interface ItemProps {
   onBlur?: () => void;
   submitIcon?: string;
   cancelIcon?: string;
+  submitAriaLabel?: string;
+  cancelAriaLabel?: string;
+  inputAriaLabel?: string;
 }
 
 const Input = ({
@@ -20,7 +24,23 @@ const Input = ({
   onBlur,
   submitIcon = "add_2",
   cancelIcon = "close",
+  submitAriaLabel = "Add todo",
+  cancelAriaLabel = "Cancel",
+  inputAriaLabel = "New todo",
 }: ItemProps) => {
+  const todoActions: IconButtonProps[] = [
+    {
+      iconName: submitIcon,
+      buttonType: "submit",
+      ariaLabel: submitAriaLabel,
+    },
+    {
+      iconName: cancelIcon,
+      onClick: onClose,
+      ariaLabel: cancelAriaLabel,
+    },
+  ];
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     onChange(e.currentTarget.value);
   };
@@ -46,19 +66,19 @@ const Input = ({
           value={value}
           onChange={handleOnChange}
           placeholder="What should be done?"
+          aria-label={inputAriaLabel}
           autoFocus
         />
-        <div className="todo-actions">
-          <button type="submit" className="naked-button">
-            <span className="material-symbols-outlined small-icon">
-              {submitIcon}
-            </span>
-          </button>
-          <button type="button" className="naked-button" onClick={onClose}>
-            <span className="material-symbols-outlined small-icon">
-              {cancelIcon}
-            </span>
-          </button>
+        <div className="todo-actions" role="group" aria-label="Input actions">
+          {todoActions.map((action) => (
+            <IconButton
+              key={`${action.iconName}-${action.ariaLabel}`}
+              iconName={action.iconName}
+              buttonType={action.buttonType}
+              onClick={action?.onClick}
+              ariaLabel={action.ariaLabel}
+            />
+          ))}
         </div>
       </form>
     </li>

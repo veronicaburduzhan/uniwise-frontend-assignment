@@ -37,6 +37,9 @@ const NewTodoInput = ({
       onChange={setNewTodo}
       onSubmit={handleSubmit}
       onClose={handleOnClose}
+      inputAriaLabel="Enter new todo"
+      submitAriaLabel="Add todo"
+      cancelAriaLabel="Cancel adding todo"
     />
   );
 };

@@ -2,6 +2,7 @@ import { useState } from "react";
 import "../index.scss";
 import Input from "./Input";
 import { TodoType } from "../types";
+import IconButton, { IconButtonProps } from "./IconButton";
 
 interface ItemTodoProps {
   item: TodoType;
@@ -20,7 +21,20 @@ const ItemTodo = ({ item, onDelete, onEdit }: ItemTodoProps) => {
 
   const doneTodo = status === "completed";
 
-  const newStatus = status === "completed" ? "active" : "completed";
+  const newStatus = doneTodo ? "active" : "completed";
+
+  const todoActions: IconButtonProps[] = [
+    {
+      iconName: "edit_square",
+      onClick: () => setIsEditing(true),
+      ariaLabel: `Edit todo: ${task}`,
+    },
+    {
+      iconName: "delete",
+      onClick: () => onDelete(id),
+      ariaLabel: `Delete todo: ${task}`,
+    },
+  ];
 
   const handleStatusChange = (
     e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent
@@ -47,13 +61,19 @@ const ItemTodo = ({ item, onDelete, onEdit }: ItemTodoProps) => {
         onClose={() => setIsEditing(false)}
         onBlur={() => setIsEditing(false)}
         submitIcon="check"
+        submitAriaLabel="Save changes"
+        cancelAriaLabel="Cancel editing"
+        inputAriaLabel="Edit todo"
       />
     );
 
   return (
     <li>
       <div className="checkbox-input" onClick={handleStatusChange}>
-        <span className="material-symbols-outlined small-icon">
+        <span
+          className="material-symbols-outlined small-icon"
+          aria-hidden="true"
+        >
           {doneTodo ? `check_box` : `check_box_outline_blank`}
         </span>
         <label
@@ -62,30 +82,27 @@ const ItemTodo = ({ item, onDelete, onEdit }: ItemTodoProps) => {
         >
           <input
             type="checkbox"
-            name="todo"
+            name={`todo-${id}`}
             checked={doneTodo}
             onChange={handleStatusChange}
+            aria-label={
+              doneTodo
+                ? `Mark "${task}" as active`
+                : `Mark "${task}" as completed`
+            }
           />
           {task}
         </label>
       </div>
-      <div className="todo-actions">
-        <button
-          type="button"
-          className="naked-button"
-          onClick={() => setIsEditing(true)}
-        >
-          <span className="material-symbols-outlined small-icon">
-            edit_square
-          </span>
-        </button>
-        <button
-          type="button"
-          className="naked-button"
-          onClick={() => onDelete(id)}
-        >
-          <span className="material-symbols-outlined small-icon">delete</span>
-        </button>
+      <div className="todo-actions" role="group" aria-label="Item actions">
+        {todoActions.map((action) => (
+          <IconButton
+            key={`${action.iconName}-${id}`}
+            iconName={action.iconName}
+            onClick={action.onClick}
+            ariaLabel={action.ariaLabel}
+          />
+        ))}
       </div>
     </li>
   );
