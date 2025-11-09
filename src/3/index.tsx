@@ -48,7 +48,7 @@ const Task3 = () => {
   };
 
   return (
-    <div id="task-3">
+    <main id="task-3">
       <div className="main-container">
         <ActionBar
           filter={filter}
@@ -68,7 +68,7 @@ const Task3 = () => {
           />
         </div>
       </div>
-    </div>
+    </main>
   );
 };
 

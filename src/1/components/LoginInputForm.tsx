@@ -1,10 +1,7 @@
 import { useState } from "react";
 import "../index.scss";
-
-export enum LoginFormError {
-  empty = "Please fill in missing fields",
-  incorrectValues = "Please input correct email and password",
-}
+import ErrorMessage from "./ErrorMessage";
+import FloatingInput from "./FloatingInput";
 
 interface LoginInputFormProps {
   email: string;
@@ -46,60 +43,33 @@ export const LoginInputForm = ({
       role="form"
       aria-labelledby="login-form-title"
     >
-      {error ? (
-        <div className="error-message">
-          <p
-            id="login-error"
-            role="alert"
-            aria-live="assertive"
-            aria-atomic="true"
-          >
-            {error}
-          </p>
-        </div>
-      ) : null}
+      <ErrorMessage error={error} />
       <div className={`login-input-group ${errorClass}`}>
-        <div
-          className={`floating-input ${email ? "has-value" : ""} ${errorClass}`}
-        >
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={email}
-            onChange={setEmail}
-            required
-            aria-invalid={!!error}
-            aria-describedby={error ? "login-error" : undefined}
-          />
-          <label htmlFor="email">Email</label>
-        </div>
+        <FloatingInput
+          value={email}
+          onChange={setEmail}
+          hasError={!!error}
+          inputType="email"
+          label="Email"
+        />
         <div className={`separator ${errorClass}`} />
-        <div
-          className={`floating-input ${
-            password ? "has-value" : ""
-          } ${errorClass} `}
-        >
-          <input
-            type={inputPasswordType}
-            name="password"
-            id="password"
-            value={password}
-            onChange={setPassword}
-            required
-            aria-invalid={!!error}
-            aria-describedby={error ? "login-error" : undefined}
-          />
-          <label htmlFor="password">Password</label>
-          <button
-            className="material-symbols-outlined icon-button"
-            onClick={handlePasswordVisibility}
-            aria-label={isPasswordVisible ? "Hide password" : "Show password"}
-            type="button"
-          >
-            {isPasswordVisible ? "visibility" : "visibility_off"}
-          </button>
-        </div>
+        <FloatingInput
+          value={password}
+          onChange={setPassword}
+          hasError={!!error}
+          inputType={inputPasswordType}
+          label="Password"
+          children={
+            <button
+              className="material-symbols-outlined icon-button"
+              onClick={handlePasswordVisibility}
+              aria-label={isPasswordVisible ? "Hide password" : "Show password"}
+              type="button"
+            >
+              {isPasswordVisible ? "visibility" : "visibility_off"}
+            </button>
+          }
+        />
       </div>
       <div>
         <button

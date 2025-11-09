@@ -19,7 +19,7 @@ const ActionBar = ({ filter, filterTodos, onOpenAddTodo }: ActionBarProps) => {
   };
 
   return (
-    <div className="action-bar-container">
+    <nav className="action-bar-container">
       <button
         type="button"
         className="primary-button material-symbols-outlined"
@@ -50,7 +50,7 @@ const ActionBar = ({ filter, filterTodos, onOpenAddTodo }: ActionBarProps) => {
           </button>
         ))}
       </div>
-    </div>
+    </nav>
   );
 };
 

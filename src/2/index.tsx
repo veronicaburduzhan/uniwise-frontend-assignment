@@ -2,8 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import "./index.scss";
 
 import List, { User } from "./components/List";
-import Input from "./components/Input";
-import SelectMenu from "./components/SelectMenu";
+import Toolbar from "./components/Toolbar";
 
 export type GenderFilter = "male" | "female" | "default";
 
@@ -61,40 +60,19 @@ const Task2 = () => {
   }, [apiUsers, searchTerm, genderFilter, sortOrder]);
 
   return (
-    <div id="task-2">
+    <main id="task-2">
       <div className="main-container">
-        <div className="toolbar">
-          <Input searchTerm={searchTerm} onChange={handleInputChange} />
-          <div className="toolbar-select-menu">
-            <SelectMenu<GenderFilter>
-              name="filter"
-              value={genderFilter}
-              onChange={setGenderFilter}
-              options={[
-                { label: "Gender", value: "default" },
-                { label: "Male", value: "male" },
-                { label: "Female", value: "female" },
-              ]}
-              className="select-wrapper"
-              aria-label="Filter by gender"
-            />
-            <SelectMenu<SortOrder>
-              name="sort"
-              value={sortOrder}
-              onChange={setSortOrder}
-              options={[
-                { label: "Sort by", value: "default" },
-                { label: "A–Z", value: "asc" },
-                { label: "Z–A", value: "desc" },
-              ]}
-              className="select-wrapper"
-              aria-label="Sort by name"
-            />
-          </div>
-        </div>
+        <Toolbar
+          searchTerm={searchTerm}
+          onSearchTermChange={handleInputChange}
+          genderFilter={genderFilter}
+          setGenderFilter={setGenderFilter}
+          sortOrder={sortOrder}
+          setSortOrder={setSortOrder}
+        />
         <List items={userList} error={error} loading={loading} />
       </div>
-    </div>
+    </main>
   );
 };
 
