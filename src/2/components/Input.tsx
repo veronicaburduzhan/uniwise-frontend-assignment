@@ -15,6 +15,7 @@ const Input = ({ searchTerm, onChange }: InputProps) => {
         placeholder="Search users..."
         name="search"
         id="search"
+        aria-label="Search users"
       />
     </div>
   );

@@ -2,11 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import "./index.scss";
 
 import List, { User } from "./components/List";
-import Toolbar from "./components/Toolbar";
-
-export type GenderFilter = "male" | "female" | "default";
-
-export type SortOrder = "default" | "asc" | "desc";
+import Toolbar, { GenderFilter, SortOrder } from "./components/Toolbar";
 
 const Task2 = () => {
   const [apiUsers, setApiUsers] = useState<User[]>([]);

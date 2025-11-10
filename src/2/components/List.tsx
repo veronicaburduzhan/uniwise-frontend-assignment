@@ -27,7 +27,13 @@ const List = ({ items, loading, error }: ListProps) => {
     return <NoItemsContainer text="No users found" />;
 
   return (
-    <div className="list-container">
+    <div
+      className="list-container"
+      role="region"
+      aria-live="polite"
+      aria-atomic="true"
+      aria-label="User list"
+    >
       <ul>
         {items.map((item) => (
           <Item item={item} key={item.id} />

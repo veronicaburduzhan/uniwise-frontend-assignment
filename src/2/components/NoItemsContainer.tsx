@@ -7,7 +7,12 @@ interface NoItemsContainerProps {
 const NoItemsContainer = ({ text }: NoItemsContainerProps) => {
   return (
     <div className="list-container">
-      <div className="no-items-container">
+      <div
+        className="no-items-container"
+        role="status"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         <p>{text}</p>
       </div>
     </div>
